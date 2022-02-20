@@ -1,14 +1,17 @@
 package com.stephen.chatapp
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
+import androidx.activity.viewModels
+import androidx.recyclerview.widget.LinearLayoutManager
+import com.stephen.chatapp.adapter.RoomListAdapter
+import com.stephen.chatapp.data.ChatRoomViewModel
+import com.stephen.chatapp.data.chatroomlist.ChatRoomModel
 import com.stephen.chatapp.databinding.ActivityMainBinding
-import com.stephen.chatapp.util.Constant
+import com.stephen.chatapp.interfaces.ClickEventListener
+import com.stephen.chatapp.util.AppUtil
 import dagger.hilt.android.AndroidEntryPoint
-import io.socket.client.IO
-import io.socket.client.Socket
-import io.socket.emitter.Emitter
 
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
@@ -17,52 +20,69 @@ class MainActivity : AppCompatActivity() {
         ActivityMainBinding.inflate(layoutInflater)
     }
 
-    private lateinit var mSocket: Socket
+    private lateinit var adapter: RoomListAdapter
+
+    private val chatRoomViewModel : ChatRoomViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
 
-        initView()
-
-        try {
-            /**
-             * Constant.BASE_URL is "http://Your IP Address:3000"
-             * ex) "http://192.168.111.111:3000"
-             */
-            mSocket = IO.socket(Constant.BASE_URL)
-            Log.d("mSocket", mSocket.toString())
-
-        } catch (e: Exception) {
-            e.printStackTrace()
-            Log.d("mSocket", "Failed to connect")
+        chatRoomViewModel.chatRooms.observe(this) {
+            adapter.submitList(it)
         }
 
-        mSocket.connect()
-        mSocket.on(Socket.EVENT_CONNECT, onConnect)
-        mSocket.on("message", onReceive)
+//        SocketHandler.setSocket()
+//        SocketHandler.establishConnection()
+//
+//        val mSocket = SocketHandler.getSocket()
+//
+//        binding.counterBtn.setOnClickListener{
+//            Log.d("chatRooms", "clicked")
+//            mSocket.emit("/sub/chat/room/room_김동현")
+//        }
+//
+//        mSocket.on("/sub/chat/room/room_김동현") { args ->
+//            if (args[0] != null) {
+//                Log.d("chatRooms", args.toString())
+//                val counter = args[0] as Int
+//                runOnUiThread {
+//                    binding.countTextView.text = counter.toString()
+//                }
+//            }
+//        }
+
+        initViews()
     }
 
-    private val onConnect: Emitter.Listener = Emitter.Listener {
-        mSocket.emit("connectReceive", "Socket connected")
-        Log.d("mSocket", "Socket connected")
+    private fun initViews() {
+        initRecyclerView()
+        initCreateRoomViews()
     }
 
-    var onReceive = Emitter.Listener {
-        Log.d("mSocket", "onReceive")
+    private fun initRecyclerView() {
+        adapter = RoomListAdapter(object : ClickEventListener<ChatRoomModel> {
+            override fun onClick(t: ChatRoomModel) {
+                startActivity(Intent(this@MainActivity, ChatRoomDetailActivity::class.java).putExtra(ChatRoomModel::class.java.name, t))
+            }
+        })
+        binding.apply {
+            recyclerView.layoutManager = LinearLayoutManager(this@MainActivity)
+            recyclerView.adapter = adapter
+        }
+
+        chatRoomViewModel.fetchAllRooms()
     }
 
-    private fun initView() {
+    private fun initCreateRoomViews() {
         binding.apply {
             button.setOnClickListener {
-                mSocket.emit("connection", "Socket connected")
-            }
-        }
-        binding.apply {
-            button2.setOnClickListener {
-                mSocket.emit("message", "Socket message")
+                val roomName = editText.text.toString()
+                if (roomName.isEmpty()) {
+                    AppUtil.showToast(this@MainActivity, getString(R.string.please_enter_chat_room_name))
+                }
+                chatRoomViewModel.createRoom(roomName)
             }
         }
     }
-
 }

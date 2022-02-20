@@ -14,6 +14,9 @@
         android:theme="@style/Theme.ChatApp"
         android:usesCleartextTraffic="true">
         <activity
+            android:name=".ChatRoomDetailActivity"
+            android:exported="true" />
+        <activity
             android:name=".MainActivity"
             android:exported="true">
             <intent-filter>
