@@ -1,17 +1,14 @@
 package com.stephen.chatapp
 
-import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.gson.Gson
 import com.stephen.chatapp.adapter.MessageListAdapter
-import com.stephen.chatapp.adapter.RoomListAdapter
 import com.stephen.chatapp.data.chatroomlist.ChatRoomModel
 import com.stephen.chatapp.data.chatroomlist.MessageModel
 import com.stephen.chatapp.databinding.ActivityChatRoomDetailBinding
-import com.stephen.chatapp.interfaces.ClickEventListener
 import com.stephen.chatapp.util.Constant
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers

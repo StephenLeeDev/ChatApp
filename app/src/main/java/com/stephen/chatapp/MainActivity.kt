@@ -1,20 +1,21 @@
 package com.stephen.chatapp
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.stephen.chatapp.adapter.RoomListAdapter
-import com.stephen.chatapp.data.ChatRoomViewModel
+import com.stephen.chatapp.base.BaseActivity
 import com.stephen.chatapp.data.chatroomlist.ChatRoomModel
+import com.stephen.chatapp.data.chatroomlist.ChatRoomViewModel
 import com.stephen.chatapp.databinding.ActivityMainBinding
 import com.stephen.chatapp.interfaces.ClickEventListener
 import com.stephen.chatapp.util.AppUtil
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class MainActivity : AppCompatActivity() {
+class MainActivity : BaseActivity() {
 
     private val binding: ActivityMainBinding by lazy {
         ActivityMainBinding.inflate(layoutInflater)
@@ -79,7 +80,7 @@ class MainActivity : AppCompatActivity() {
             button.setOnClickListener {
                 val roomName = editText.text.toString()
                 if (roomName.isEmpty()) {
-                    AppUtil.showToast(this@MainActivity, getString(R.string.please_enter_chat_room_name))
+                    AppUtil.showToast(this@MainActivity, getString(R.string.please_enter_chat_room_name), Toast.LENGTH_SHORT)
                 }
                 chatRoomViewModel.createRoom(roomName)
             }

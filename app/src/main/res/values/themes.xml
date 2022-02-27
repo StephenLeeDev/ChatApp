@@ -1,16 +1,166 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
-    <style name="Theme.ChatApp" parent="Theme.MaterialComponents.Light.NoActionBar">
-        <!-- Primary brand color. -->
-        <item name="colorPrimary">@color/purple_500</item>
+    <style name="Theme.StephenLeeDev" parent="Theme.MaterialComponents.Light.NoActionBar">
+        <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryVariant">@color/purple_700</item>
-        <item name="colorOnPrimary">@color/white</item>
-        <!-- Secondary brand color. -->
-        <item name="colorSecondary">@color/teal_200</item>
+        <item name="colorOnPrimary">@color/white</item>>
+        <item name="colorSecondary">@color/colorPrimary</item>
         <item name="colorSecondaryVariant">@color/teal_700</item>
         <item name="colorOnSecondary">@color/black</item>
-        <!-- Status bar color. -->
-        <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
-        <!-- Customize your theme here. -->
+        <item name="android:textViewStyle">@style/Theme.StephenLeeDev.TextViewStyle</item>
+        <item name="android:buttonStyle">@style/Theme.StephenLeeDev.ButtonStyle</item>
+        <item name="buttonStyle">@style/Theme.StephenLeeDev.ButtonStyle</item>
+        <item name="editTextStyle">@style/Theme.StephenLeeDev.EditTextStyle</item>
+        <item name="searchViewStyle">@style/Theme.StephenLeeDev.SearchViewStyle</item>
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+        <item name="android:statusBarColor">@color/black</item>
+        <item name="android:windowContentTransitions">true</item>
+        <item name="android:actionMenuTextColor">@color/base_menu_color</item>
+        <item name="android:alertDialogTheme">@style/Theme.StephenLeeDev.AlertDialogCustom</item>
+        <item name="android:actionBarItemBackground">@drawable/ripple_oval_colored</item>
+        <item name="android:actionMenuTextAppearance">
+            @style/Theme.StephenLeeDev.PopupOverlay.TitleAppearance
+        </item>
     </style>
+
+    <style name="Theme.StephenLeeDev.AlertDialogCustom" parent="android:Theme.Material.Light.Dialog.Alert">
+        <item name="colorAccent">@color/colorPrimary</item>
+        <item name="buttonBarNegativeButtonStyle">@style/Theme.StephenLeeDev.AlertButtonStyle</item>
+        <item name="buttonBarPositiveButtonStyle">@style/Theme.StephenLeeDev.AlertButtonStyle</item>
+        <item name="android:includeFontPadding">false</item>
+        <item name="android:textSize">20dp</item>
+        <item name="android:fontFamily">@font/notosans_regular</item>
+    </style>
+
+    <style name="Theme.StephenLeeDev.AlertButtonStyle" parent="Widget.AppCompat.Button.ButtonBar.AlertDialog">
+        <item name="android:textColorPrimary">@color/colorPrimary</item>
+    </style>
+
+    <style name="Theme.StephenLeeDev.NoActionBar.TransparentStatusBar" parent="Theme.StephenLeeDev">
+        <item name="android:windowTranslucentStatus">true</item>
+        <item name="android:windowTranslucentNavigation">true</item>
+    </style>
+
+    <style name="Theme.StephenLeeDev.Dialog" parent="Theme.AppCompat.Light.Dialog.Alert">
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/purple_200</item>
+        <item name="colorAccent">@color/colorPrimary</item>
+        <item name="colorError">@color/button_red</item>
+        <item name="android:windowMinWidthMajor">85%</item>
+        <item name="android:textViewStyle">@style/Theme.StephenLeeDev.TextViewStyle</item>
+        <item name="android:buttonStyle">@style/Theme.StephenLeeDev.ButtonStyle</item>
+        <item name="buttonStyle">@style/Theme.StephenLeeDev.ButtonStyle</item>
+    </style>
+
+    <style name="Theme.StephenLeeDev.TextViewStyle">
+        <item name="android:includeFontPadding">false</item>
+        <item name="android:fontFamily">@font/notosans_regular</item>
+        <item name="android:textColor">@color/base_text_color</item>
+        <item name="android:enabled">true</item>
+        <item name="android:textSize">15dp</item>
+    </style>
+
+    <style name="Theme.StephenLeeDev.ButtonStyle" parent="Widget.AppCompat.Button">
+        <item name="android:fontFamily">@font/notosans_regular</item>
+        <item name="android:minHeight">50dp</item>
+        <item name="android:background">@drawable/background_blue_radius_16</item>
+        <item name="android:foreground">?attr/selectableItemBackground</item>
+        <item name="android:textColor">@color/base_button_color</item>
+        <item name="android:stateListAnimator">@null</item>
+        <item name="android:textSize">16dp</item>
+    </style>
+
+    <style name="Theme.StephenLeeDev.CollapsingToolbar.TitleText" parent="TextAppearance.Design.CollapsingToolbar.Expanded">
+        <item name="android:includeFontPadding">false</item>
+        <item name="android:fontFamily">@font/notosans_bold</item>
+        <item name="android:textColor">@color/base_text_color</item>
+        <item name="android:enabled">true</item>
+        <item name="android:textSize">31dp</item>
+    </style>
+
+    <style name="Theme.StephenLeeDev.BottomSheetDialogStyle" parent="Theme.MaterialComponents.Light.BottomSheetDialog">
+        <item name="android:textViewStyle">@style/Theme.StephenLeeDev.TextViewStyle</item>
+        <item name="android:buttonStyle">@style/Theme.StephenLeeDev.ButtonStyle</item>
+        <item name="android:windowIsFloating">false</item>
+        <item name="android:background">@android:color/transparent</item>
+        <item name="android:statusBarColor">@android:color/transparent</item>
+        <item name="android:windowSoftInputMode">adjustResize</item>
+        <item name="bottomSheetStyle">
+            @style/Theme.StephenLeeDev.BottomSheetDialog.Background
+        </item>
+    </style>
+
+    <style name="Theme.StephenLeeDev.BottomSheetDialog.Background" parent="Widget.Design.BottomSheet.Modal">
+        <item name="android:background">@android:color/transparent</item>
+    </style>
+
+    <style name="Theme.StephenLeeDev.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar">
+        <item name="android:colorControlNormal">@color/black</item>
+        <item name="colorControlNormal">@color/black</item>
+        <item name="android:textColorSecondary">@color/black</item>
+        <item name="android:background">@color/white</item>
+        <item name="elevation">0dp</item>
+        <item name="android:elevation">0dp</item>
+    </style>
+
+    <style name="Theme.StephenLeeDev.EditTextStyle" parent="Widget.AppCompat.EditText">
+        <item name="android:minHeight">50dp</item>
+        <item name="android:paddingTop">4dp</item>
+
+        <item name="android:includeFontPadding">false</item>
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:fontFamily">@font/notosans_regular</item>
+        <item name="android:textCursorDrawable">@null</item>
+
+        <item name="android:background">@drawable/background_white_radius_16</item>
+
+        <item name="android:textColorHint">#9daab7</item>
+        <item name="android:textSize">14dp</item>
+    </style>
+
+    <style name="Theme.StephenLeeDev.PopupOverlay" parent="ThemeOverlay.AppCompat.Light">
+        <item name="android:colorControlNormal">@color/black</item>
+        <item name="colorControlNormal">@color/black</item>
+        <item name="android:textColorSecondary">@color/black</item>
+        <item name="titleTextColor">@color/black</item>
+        <item name="titleTextAppearance">
+            @style/Theme.StephenLeeDev.PopupOverlay.TitleAppearance
+        </item>
+    </style>
+
+    <style name="Theme.StephenLeeDev.PopupOverlay.TitleAppearance" parent="Theme.StephenLeeDev.TextViewStyle">
+        <item name="android:fontFamily">@font/notosans_bold</item>
+        <item name="android:textSize">16dp</item>
+        <item name="android:textColor">@color/black</item>
+        <item name="android:layout_gravity">bottom</item>
+    </style>
+
+    <style name="Theme.StephenLeeDev.TextViewStyle.ToolbarTitle">
+        <item name="android:fontFamily">@font/notosans_bold</item>
+        <item name="android:textSize">16dp</item>
+        <item name="android:textColor">@color/black</item>
+        <item name="android:includeFontPadding">false</item>
+    </style>
+
+    <style name="Theme.StephenLeeDev.SearchViewStyle" parent="Widget.AppCompat.Light.SearchView">
+        <item name="searchHintIcon">@null</item>
+        <item name="searchIcon">@null</item>
+        <item name="android:paddingStart">-16dp</item>
+        <item name="android:paddingLeft">-16dp</item>
+    </style>
+
+    <style name="Theme.StephenLeeDev.Dialog.Full" parent="Theme.AppCompat.Dialog">
+        <item name="android:windowIsFloating">false</item>
+        <item name="android:windowFullscreen">false</item>
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:backgroundDimEnabled">true</item>
+        <item name="android:backgroundDimAmount">0.5</item>
+    </style>
+
+    <style name="Theme.StephenLeeDev.NoWindowBackground" parent="Theme.AppCompat.NoActionBar">
+        <item name="android:windowContentOverlay">@null</item>
+        <item name="android:windowIsTranslucent">true</item>
+    </style>
+
 </resources>
